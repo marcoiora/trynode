@@ -1,0 +1,44 @@
+body {
+	background-color: white;
+}
+
+header  {
+	text-align: center;
+    /*margin-left: 20%;*/
+}
+
+article img {
+	float: left;
+}
+
+article h1 {
+	text-align: center;
+}
+
+article p {
+	padding-left: 20px;
+}
+
+article strong {
+	padding: 10px;
+}
+
+article {
+	clear: both;
+	width: 50%;
+	margin-left: 25%;
+	border-bottom: 2px dashed blue;
+	background-color: #dedede;
+	padding: 5px;
+}
+
+article p.trama {
+	clear: both;
+	padding: 10px;
+}
+
+aside {
+	float: right;
+	width: 20%;
+	padding: 10px;
+}
