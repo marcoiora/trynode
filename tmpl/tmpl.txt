@@ -1,10 +1,10 @@
 <html>
 <head>
 <title>
-- titolo
+- res.write(""+titolo);
 </title>
 </head>
 <body>
-- corpo
+- res.write(""+corpo);
 </body>
 </html>
