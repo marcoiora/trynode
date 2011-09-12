@@ -1,8 +1,31 @@
 var fs = require('fs');
 
-function Template(path, callback) {
+function Template(path) {
+    var self = this,
+        output, buffer;
+        
+    var loaded = false;
+    var error;
+    
 	fs.readFile(path, function(err, data) {
 		if (!err) {
+            data = data.replace(/%>((^%>)*)<%/g, function(matched, p, index) {
+                lines = p.split("\n");
+                outtext = "";
+                for (i = 0; i < lines.length; i++) {
+                    outtext += "buffer += \""+lines[i].replace(/"/g,"\\\"")+"\\n\";\n";
+                }
+                return outtext;
+            });
+            data = data.replace(/<% ((^<%)*) %>/g, function(matched,p,index) {
+                return p;
+            });
+            data = data.replace(/<%= ((^<%)*) %>/g, function(matched,p,index) {
+                return "buffer += ("+p+");";
+            });
+            
+            console.log(data);
+            /*
             lines = data.utf8Slice().split("\n");
             var output = "";
             for (var i = 0; i < lines.length; i++) {
@@ -10,14 +33,21 @@ function Template(path, callback) {
                 if (line.match(/^- .+/)) {
                     output += line.replace(/^- /,"");
                 } else {
-                    output += "res.write(\""+line.replace(/"/g,"\\\"")+"\");";
+                    output += "buffer += \""+line.replace(/"/g,"\\\"")+"\";";
                 }
-            }
-            callback.apply(this,[output]);
+            }*/
 		} else {
-			callback.apply(this,["Error, template "+path+" not found"]);
+            loaded = false;
+            error = err;
+            console.log('err');
 		}
 	});
+}
+
+Template.prototype = {
+    render : function(context) {
+        eval.apply(context,output);
+    }
 }
 
 exports.Template = Template;
