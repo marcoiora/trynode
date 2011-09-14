@@ -1,8 +1,9 @@
 var template = require('./template');
 var http = require('http');
 
+t = new template.Template('tmpl/tmpl.txt');
+
 var server = http.createServer(function(req, res) {
-    t = new template.Tempalte('tmpl/tmpl.txt');
     res.writeHead(200);
     t = new template.Template('tmpl/tmpl.txt');
     /*template.Template('tmpl/tmpl.txt', function(tmpl) {

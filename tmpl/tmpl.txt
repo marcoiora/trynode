@@ -1,13 +1,13 @@
 <html>
 <head>
-<title>
-<%= titolo %>
-</title>
+<title><%= titolo %></title>
 </head>
 <body>
 <%= corpo %>
-<% for (i = 0; i < 3; i++) { %>
+<% 
+for (i = 0; i < 3; i++) { 
+%><p>
 <%= ""+i %>
-<% } %>
+</p><% } %><div id="ciao">ciao</div>
 </body>
 </html>

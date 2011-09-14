@@ -9,7 +9,9 @@ function Template(path) {
     
 	fs.readFile(path, function(err, data) {
 		if (!err) {
-            data = data.replace(/%>((^%>)*)<%/g, function(matched, p, index) {
+            data = data.utf8Slice().replace(/(.*)(?!<%.*%>)/g, function(matched, p, index) {
+				console.log(matched);
+				
                 lines = p.split("\n");
                 outtext = "";
                 for (i = 0; i < lines.length; i++) {
@@ -17,14 +19,15 @@ function Template(path) {
                 }
                 return outtext;
             });
-            data = data.replace(/<% ((^<%)*) %>/g, function(matched,p,index) {
+			
+            data = data.replace(/<% (.*) %>/g, function(matched,p,index) {
                 return p;
             });
-            data = data.replace(/<%= ((^<%)*) %>/g, function(matched,p,index) {
+            data = data.replace(/<%= (.*) %>/g, function(matched,p,index) {
                 return "buffer += ("+p+");";
             });
             
-            console.log(data);
+            
             /*
             lines = data.utf8Slice().split("\n");
             var output = "";
