@@ -1,9 +1,9 @@
 <html>
 <head>
-<title><%= titolo %></title>
+<title><%= this.titolo %></title>
 </head>
 <body>
-<%= corpo %>
+<%= this.corpo %>
 <% 
 for (i = 0; i < 3; i++) { 
 %><p>
